@@ -1,0 +1,242 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Portfolio Home</title>
+    <link rel="stylesheet" href="styles.css?v=egg-shadow-layer">
+  </head>
+  <body>
+    <main class="page-shell home-page" aria-label="Portfolio homepage">
+      <header class="site-header">
+        <div class="header-location" aria-label="Current location">
+          <div
+            class="mini-globe"
+            id="location-globe"
+            role="img"
+            aria-label="Spinning globe with a pin on South Korea"
+          ></div>
+          <p>Currently in: <span>South Korea</span></p>
+        </div>
+
+        <div class="brand-row">
+          <a class="home-link" href="index.html">Levi Caribou Lappe</a>
+        </div>
+
+        <nav class="site-nav" aria-label="Primary navigation">
+          <a class="nav-link" href="index.html" aria-current="page">Home</a>
+          <a class="nav-link" href="about.html">About</a>
+          <a class="nav-link" href="resume.html">Resume</a>
+          <a class="nav-link" href="contact.html">Contact</a>
+        </nav>
+      </header>
+
+      <section class="intro">
+        <div class="image-placeholder" aria-label="Placeholder image">
+          <span>Image Placeholder</span>
+        </div>
+
+        <div class="intro-copy">
+          <p class="eyebrow">Portfolio</p>
+          <h1 class="egg-headline">
+            Every book is a bird's egg.
+            <span class="egg-drop-stage" aria-hidden="true"></span>
+          </h1>
+          <p>
+            Student's aren't birds&mdash;they're definitely not eggs&mdash;yet there is
+            something yolky about a young person's imagination.
+          </p>
+          <p>
+            As a teacher, I don't crack eggs.
+          </p>
+          <p>
+            I lead beaks to break shells.
+          </p>
+        </div>
+      </section>
+
+      <section class="focus-modules" aria-label="Portfolio sections" data-focus-modules>
+        <div class="module-switcher" role="tablist" aria-label="Portfolio modules">
+          <button
+            class="module-tab is-active"
+            type="button"
+            id="projects-tab"
+            role="tab"
+            aria-selected="true"
+            aria-controls="projects-panel"
+            data-module-tab="projects"
+          >
+            Projects
+          </button>
+          <button
+            class="module-tab"
+            type="button"
+            id="rapport-tab"
+            role="tab"
+            aria-selected="false"
+            aria-controls="rapport-panel"
+            data-module-tab="rapport"
+          >
+            Student and Parent Rapport
+          </button>
+        </div>
+
+        <div class="module-wheel">
+          <div
+            class="focus-module is-active"
+            id="projects-panel"
+            role="tabpanel"
+            aria-labelledby="projects-tab"
+            data-module-panel="projects"
+          >
+            <div class="home-column">
+          <h2>Projects</h2>
+          <article class="project-item">
+            <h3>Project-based Assessment:</h3>
+            <p class="project-subhead">Literary analysis and <cite>Holes</cite> by Louis Sachar</p>
+            <p class="project-subhead">4th grade</p>
+            <p class="project-description">
+              Using <span class="quiet-highlight">textual evidence, quotes, and group work</span>,
+              students designed character collages and recommended jobs they
+              believed a boy from D-tent could do well after returning to
+              society.
+            </p>
+            <figure
+              class="project-slideshow"
+              aria-label="Project-based assessment slideshow for Holes"
+              data-slideshow
+            >
+              <figcaption>Browse examples</figcaption>
+              <img
+                src="resources/images/Projects/Hole's%20PBA/1.%20Boys%20(3).webp"
+                alt="Student project image 1 for the Holes literary analysis assessment"
+                data-duration="3000"
+              >
+              <img
+                src="resources/images/Projects/Hole's%20PBA/2.%20Boys%20(Zero).webp"
+                alt="Student project image 2 for the Holes literary analysis assessment"
+                data-duration="5500"
+              >
+              <img
+                src="resources/images/Projects/Hole's%20PBA/3.%20Girls%20(2).webp"
+                alt="Student project image 3 for the Holes literary analysis assessment"
+                data-duration="3000"
+              >
+              <img
+                src="resources/images/Projects/Hole's%20PBA/4.%20Girls%20(Stanley).webp"
+                alt="Student project image 4 for the Holes literary analysis assessment"
+                data-duration="5500"
+              >
+              <img
+                src="resources/images/Projects/Hole's%20PBA/5.%20Girls%20(3).webp"
+                alt="Student project image 5 for the Holes literary analysis assessment"
+                data-duration="3000"
+              >
+              <img
+                src="resources/images/Projects/Hole's%20PBA/6.%20Girls%20(Armpit).webp"
+                alt="Student project image 6 for the Holes literary analysis assessment"
+                data-duration="5500"
+              >
+              <button class="slideshow-control slideshow-control-prev" type="button" aria-label="Previous slide">
+                &#8249;
+              </button>
+              <button class="slideshow-control slideshow-control-next" type="button" aria-label="Next slide">
+                &#8250;
+              </button>
+              <div class="slideshow-dots" aria-label="Slideshow navigation"></div>
+            </figure>
+          </article>
+
+          <article class="project-item">
+            <h3>Project Based Learning</h3>
+            <p class="project-subhead">Book Day Presentation</p>
+            <p class="project-subhead">Kindergarten</p>
+            <p class="project-description">
+              Over the course of three months, Saturn class worked together
+              <span class="quiet-highlight">brainstorming, writing, and designing</span>
+              their very own story. First, we brainstormed and voted for the
+              best ideas. Then, students shared sentences while I guided what
+              they wanted to say. Next, we worked on our best handwriting.
+              Finally, at the end of the three months, the students presented
+              their book to their parents on a special book day celebration!
+            </p>
+            <div class="book-viewer" data-book aria-label="Interactive student book">
+              <div class="book-stage">
+                <button class="book-page" type="button" aria-label="Next book page"></button>
+              </div>
+              <div class="book-controls">
+                <button class="book-button book-prev" type="button">Previous page</button>
+                <span class="book-status" aria-live="polite"></span>
+                <button class="book-button book-next" type="button">Next page</button>
+              </div>
+              <div class="book-pages" hidden>
+                <img src="resources/images/Projects/CLC/The%20Flying%20Robot%20School%20and%20the%20Magical%20Unicorn%20Castle/Slide3.JPG" alt="Book page 1">
+                <img src="resources/images/Projects/CLC/The%20Flying%20Robot%20School%20and%20the%20Magical%20Unicorn%20Castle/Slide4.JPG" alt="Book page 2">
+                <img src="resources/images/Projects/CLC/The%20Flying%20Robot%20School%20and%20the%20Magical%20Unicorn%20Castle/Slide5.JPG" alt="Book page 3">
+                <img src="resources/images/Projects/CLC/The%20Flying%20Robot%20School%20and%20the%20Magical%20Unicorn%20Castle/Slide6.JPG" alt="Book page 4">
+                <img src="resources/images/Projects/CLC/The%20Flying%20Robot%20School%20and%20the%20Magical%20Unicorn%20Castle/Slide7.JPG" alt="Book page 5">
+                <img src="resources/images/Projects/CLC/The%20Flying%20Robot%20School%20and%20the%20Magical%20Unicorn%20Castle/Slide8.JPG" alt="Book page 6">
+                <img src="resources/images/Projects/CLC/The%20Flying%20Robot%20School%20and%20the%20Magical%20Unicorn%20Castle/Slide9.JPG" alt="Book page 7">
+                <img src="resources/images/Projects/CLC/The%20Flying%20Robot%20School%20and%20the%20Magical%20Unicorn%20Castle/Slide10.JPG" alt="Book page 8">
+                <img src="resources/images/Projects/CLC/The%20Flying%20Robot%20School%20and%20the%20Magical%20Unicorn%20Castle/Slide11.JPG" alt="Book page 9">
+                <img src="resources/images/Projects/CLC/The%20Flying%20Robot%20School%20and%20the%20Magical%20Unicorn%20Castle/Slide12.JPG" alt="Book page 10">
+                <img src="resources/images/Projects/CLC/The%20Flying%20Robot%20School%20and%20the%20Magical%20Unicorn%20Castle/Slide13.JPG" alt="Book page 11">
+                <img src="resources/images/Projects/CLC/The%20Flying%20Robot%20School%20and%20the%20Magical%20Unicorn%20Castle/Slide14.JPG" alt="Book page 12">
+                <img src="resources/images/Projects/CLC/The%20Flying%20Robot%20School%20and%20the%20Magical%20Unicorn%20Castle/Slide15.JPG" alt="Book page 13">
+                <img src="resources/images/Projects/CLC/The%20Flying%20Robot%20School%20and%20the%20Magical%20Unicorn%20Castle/Slide16.JPG" alt="Book page 14">
+              </div>
+            </div>
+          </article>
+            </div>
+          </div>
+
+          <div
+            class="focus-module"
+            id="rapport-panel"
+            role="tabpanel"
+            aria-labelledby="rapport-tab"
+            aria-hidden="true"
+            data-module-panel="rapport"
+            inert
+          >
+            <div class="home-column">
+          <h2>Student and Parent Rapport</h2>
+          <figure
+            class="adaptive-slideshow rapport-slideshow"
+            aria-label="Student and parent rapport slideshow"
+            data-adaptive-slideshow
+          >
+            <figcaption>Browse examples</figcaption>
+            <img
+              src="resources/images/Rapport/1st.jpg"
+              alt="Student rapport photo 1"
+              data-duration="6500"
+            >
+            <img
+              src="resources/images/Rapport/Rapport%201.PNG"
+              alt="Student and parent rapport message 1"
+              data-duration="6500"
+            >
+            <img
+              src="resources/images/Rapport/Rapport%202.png"
+              alt="Student and parent rapport message 2"
+              data-duration="6500"
+            >
+            <button class="slideshow-control slideshow-control-prev" type="button" aria-label="Previous rapport slide">
+              &#8249;
+            </button>
+            <button class="slideshow-control slideshow-control-next" type="button" aria-label="Next rapport slide">
+              &#8250;
+            </button>
+            <div class="slideshow-dots" aria-label="Rapport slideshow navigation"></div>
+          </figure>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+    <script type="module" src="globe.js"></script>
+    <script type="module" src="egg-drop.js?v=subtle-click-lines"></script>
+    <script src="home.js?v=modules"></script>
+  </body>
+</html>
