@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Portfolio Home</title>
-    <link rel="stylesheet" href="styles.css?v=egg-shadow-layer">
+    <link rel="stylesheet" href="styles.css?v=home-2-rapport-crop">
   </head>
   <body>
     <main class="page-shell home-page" aria-label="Portfolio homepage">
@@ -31,7 +31,7 @@
         </nav>
       </header>
 
-      <section class="intro">
+      <section class="intro" data-evidence-spotlight data-spotlight-mode="intro">
         <div class="image-placeholder" aria-label="Placeholder image">
           <span>Image Placeholder</span>
         </div>
@@ -40,7 +40,10 @@
           <p class="eyebrow">Portfolio</p>
           <h1 class="egg-headline">
             Every book is a bird's egg.
-            <span class="egg-drop-stage" aria-hidden="true"></span>
+            <span class="egg-drop-stage" data-egg-mode="glow" aria-hidden="true">
+              <span class="egg-milestone" aria-live="polite"></span>
+              <span class="egg-counter" aria-live="polite">Hatched Eggs: 0</span>
+            </span>
           </h1>
           <p>
             Student's aren't birds&mdash;they're definitely not eggs&mdash;yet there is
@@ -55,188 +58,109 @@
         </div>
       </section>
 
-      <section class="focus-modules" aria-label="Portfolio sections" data-focus-modules>
-        <div class="module-switcher" role="tablist" aria-label="Portfolio modules">
-          <button
-            class="module-tab is-active"
-            type="button"
-            id="projects-tab"
-            role="tab"
-            aria-selected="true"
-            aria-controls="projects-panel"
-            data-module-tab="projects"
-          >
-            Projects
-          </button>
-          <button
-            class="module-tab"
-            type="button"
-            id="rapport-tab"
-            role="tab"
-            aria-selected="false"
-            aria-controls="rapport-panel"
-            data-module-tab="rapport"
-          >
-            Student and Parent Rapport
-          </button>
+      <section class="proof-shelf" aria-label="Evidence of student learning">
+        <div class="proof-heading">
+          <p class="eyebrow">Evidence</p>
+          <h2>Shells Breaking</h2>
         </div>
 
-        <div class="module-wheel">
-          <div
-            class="focus-module is-active"
-            id="projects-panel"
-            role="tabpanel"
-            aria-labelledby="projects-tab"
-            data-module-panel="projects"
-          >
-            <div class="home-column">
-          <h2>Projects</h2>
-          <article class="project-item">
-            <h3>Project-based Assessment:</h3>
-            <p class="project-subhead">Literary analysis and <cite>Holes</cite> by Louis Sachar</p>
-            <p class="project-subhead">4th grade</p>
-            <p class="project-description">
-              Using <span class="quiet-highlight">textual evidence, quotes, and group work</span>,
-              students designed character collages and recommended jobs they
-              believed a boy from D-tent could do well after returning to
-              society.
-            </p>
-            <figure
-              class="project-slideshow"
-              aria-label="Project-based assessment slideshow for Holes"
-              data-slideshow
-            >
-              <figcaption>Browse examples</figcaption>
+        <div class="proof-grid">
+          <article class="proof-card proof-card-return" data-spotlight-return tabindex="0" role="button" aria-label="Return to portfolio introduction">
+            <div class="proof-card-egg">
+              <span></span>
+            </div>
+            <div>
+              <span>Portfolio</span>
+              <h3>Every book is a bird's egg.</h3>
+              <p>Return to the landing thought.</p>
+            </div>
+          </article>
+
+          <article class="proof-card" data-proof-slideshow data-spotlight-card tabindex="0" role="button" aria-label="Feature project-based assessment evidence">
+            <div class="proof-media">
               <img
+                class="is-active"
                 src="resources/images/Projects/Hole's%20PBA/1.%20Boys%20(3).webp"
-                alt="Student project image 1 for the Holes literary analysis assessment"
-                data-duration="3000"
-              >
-              <img
-                src="resources/images/Projects/Hole's%20PBA/2.%20Boys%20(Zero).webp"
-                alt="Student project image 2 for the Holes literary analysis assessment"
-                data-duration="5500"
-              >
-              <img
-                src="resources/images/Projects/Hole's%20PBA/3.%20Girls%20(2).webp"
-                alt="Student project image 3 for the Holes literary analysis assessment"
-                data-duration="3000"
+                alt="Students presenting their Holes character collage"
               >
               <img
                 src="resources/images/Projects/Hole's%20PBA/4.%20Girls%20(Stanley).webp"
-                alt="Student project image 4 for the Holes literary analysis assessment"
-                data-duration="5500"
+                alt="Student character collage from a Holes literary analysis project"
+              >
+              <img
+                src="resources/images/Projects/Hole's%20PBA/2.%20Boys%20(Zero).webp"
+                alt="Student character collage for Zero from Holes"
+              >
+              <img
+                src="resources/images/Projects/Hole's%20PBA/3.%20Girls%20(2).webp"
+                alt="Students presenting their Stanley character collage"
               >
               <img
                 src="resources/images/Projects/Hole's%20PBA/5.%20Girls%20(3).webp"
-                alt="Student project image 5 for the Holes literary analysis assessment"
-                data-duration="3000"
+                alt="Students presenting their Holes group project"
               >
               <img
                 src="resources/images/Projects/Hole's%20PBA/6.%20Girls%20(Armpit).webp"
-                alt="Student project image 6 for the Holes literary analysis assessment"
-                data-duration="5500"
+                alt="Student character collage for Armpit from Holes"
               >
-              <button class="slideshow-control slideshow-control-prev" type="button" aria-label="Previous slide">
-                &#8249;
-              </button>
-              <button class="slideshow-control slideshow-control-next" type="button" aria-label="Next slide">
-                &#8250;
-              </button>
-              <div class="slideshow-dots" aria-label="Slideshow navigation"></div>
-            </figure>
-          </article>
-
-          <article class="project-item">
-            <h3>Project Based Learning</h3>
-            <p class="project-subhead">Book Day Presentation</p>
-            <p class="project-subhead">Kindergarten</p>
-            <p class="project-description">
-              Over the course of three months, Saturn class worked together
-              <span class="quiet-highlight">brainstorming, writing, and designing</span>
-              their very own story. First, we brainstormed and voted for the
-              best ideas. Then, students shared sentences while I guided what
-              they wanted to say. Next, we worked on our best handwriting.
-              Finally, at the end of the three months, the students presented
-              their book to their parents on a special book day celebration!
-            </p>
-            <div class="book-viewer" data-book aria-label="Interactive student book">
-              <div class="book-stage">
-                <button class="book-page" type="button" aria-label="Next book page"></button>
-              </div>
-              <div class="book-controls">
-                <button class="book-button book-prev" type="button">Previous page</button>
-                <span class="book-status" aria-live="polite"></span>
-                <button class="book-button book-next" type="button">Next page</button>
-              </div>
-              <div class="book-pages" hidden>
-                <img src="resources/images/Projects/CLC/The%20Flying%20Robot%20School%20and%20the%20Magical%20Unicorn%20Castle/Slide3.JPG" alt="Book page 1">
-                <img src="resources/images/Projects/CLC/The%20Flying%20Robot%20School%20and%20the%20Magical%20Unicorn%20Castle/Slide4.JPG" alt="Book page 2">
-                <img src="resources/images/Projects/CLC/The%20Flying%20Robot%20School%20and%20the%20Magical%20Unicorn%20Castle/Slide5.JPG" alt="Book page 3">
-                <img src="resources/images/Projects/CLC/The%20Flying%20Robot%20School%20and%20the%20Magical%20Unicorn%20Castle/Slide6.JPG" alt="Book page 4">
-                <img src="resources/images/Projects/CLC/The%20Flying%20Robot%20School%20and%20the%20Magical%20Unicorn%20Castle/Slide7.JPG" alt="Book page 5">
-                <img src="resources/images/Projects/CLC/The%20Flying%20Robot%20School%20and%20the%20Magical%20Unicorn%20Castle/Slide8.JPG" alt="Book page 6">
-                <img src="resources/images/Projects/CLC/The%20Flying%20Robot%20School%20and%20the%20Magical%20Unicorn%20Castle/Slide9.JPG" alt="Book page 7">
-                <img src="resources/images/Projects/CLC/The%20Flying%20Robot%20School%20and%20the%20Magical%20Unicorn%20Castle/Slide10.JPG" alt="Book page 8">
-                <img src="resources/images/Projects/CLC/The%20Flying%20Robot%20School%20and%20the%20Magical%20Unicorn%20Castle/Slide11.JPG" alt="Book page 9">
-                <img src="resources/images/Projects/CLC/The%20Flying%20Robot%20School%20and%20the%20Magical%20Unicorn%20Castle/Slide12.JPG" alt="Book page 10">
-                <img src="resources/images/Projects/CLC/The%20Flying%20Robot%20School%20and%20the%20Magical%20Unicorn%20Castle/Slide13.JPG" alt="Book page 11">
-                <img src="resources/images/Projects/CLC/The%20Flying%20Robot%20School%20and%20the%20Magical%20Unicorn%20Castle/Slide14.JPG" alt="Book page 12">
-                <img src="resources/images/Projects/CLC/The%20Flying%20Robot%20School%20and%20the%20Magical%20Unicorn%20Castle/Slide15.JPG" alt="Book page 13">
-                <img src="resources/images/Projects/CLC/The%20Flying%20Robot%20School%20and%20the%20Magical%20Unicorn%20Castle/Slide16.JPG" alt="Book page 14">
-              </div>
+            </div>
+            <div>
+              <span>Analysis</span>
+              <h3>Project-based Assessment</h3>
+              <p>Fourth graders used textual evidence, quotes, and group work to build character collages from <cite>Holes</cite>.</p>
             </div>
           </article>
-            </div>
-          </div>
 
-          <div
-            class="focus-module"
-            id="rapport-panel"
-            role="tabpanel"
-            aria-labelledby="rapport-tab"
-            aria-hidden="true"
-            data-module-panel="rapport"
-            inert
-          >
-            <div class="home-column">
-          <h2>Student and Parent Rapport</h2>
-          <figure
-            class="adaptive-slideshow rapport-slideshow"
-            aria-label="Student and parent rapport slideshow"
-            data-adaptive-slideshow
-          >
-            <figcaption>Browse examples</figcaption>
-            <img
-              src="resources/images/Rapport/1st.jpg"
-              alt="Student rapport photo 1"
-              data-duration="6500"
-            >
-            <img
-              src="resources/images/Rapport/Rapport%201.PNG"
-              alt="Student and parent rapport message 1"
-              data-duration="6500"
-            >
-            <img
-              src="resources/images/Rapport/Rapport%202.png"
-              alt="Student and parent rapport message 2"
-              data-duration="6500"
-            >
-            <button class="slideshow-control slideshow-control-prev" type="button" aria-label="Previous rapport slide">
-              &#8249;
-            </button>
-            <button class="slideshow-control slideshow-control-next" type="button" aria-label="Next rapport slide">
-              &#8250;
-            </button>
-            <div class="slideshow-dots" aria-label="Rapport slideshow navigation"></div>
-          </figure>
+          <article class="proof-card" data-proof-slideshow data-spotlight-card tabindex="0" role="button" aria-label="Feature book day presentation evidence">
+            <div class="proof-media">
+              <img
+                class="is-active"
+                src="resources/images/Projects/CLC/The%20Flying%20Robot%20School%20and%20the%20Magical%20Unicorn%20Castle/Slide3.JPG"
+                alt="Cover page from a kindergarten class book project"
+              >
+              <img
+                src="resources/images/Projects/CLC/The%20Flying%20Robot%20School%20and%20the%20Magical%20Unicorn%20Castle/Slide7.JPG"
+                alt="Interior page from the kindergarten class book"
+              >
+              <img
+                src="resources/images/Projects/CLC/The%20Flying%20Robot%20School%20and%20the%20Magical%20Unicorn%20Castle/Slide14.JPG"
+                alt="Later page from the kindergarten class book"
+              >
             </div>
-          </div>
+            <div>
+              <span>Authorship</span>
+              <h3>Book Day Presentation</h3>
+              <p>Kindergarten students brainstormed, wrote, designed, and presented their own class book to parents.</p>
+            </div>
+          </article>
+
+          <article class="proof-card" data-proof-slideshow data-spotlight-card tabindex="0" role="button" aria-label="Feature student and parent rapport evidence">
+            <div class="proof-media">
+              <img
+                class="is-active"
+                src="resources/images/Rapport/Rapport%201.PNG"
+                alt="Student and parent rapport message"
+              >
+              <img
+                src="resources/images/Rapport/Rapport%202%20parent%20message.png"
+                alt="Cropped parent message about writing progress"
+              >
+              <img
+                src="resources/images/Rapport/1st.jpg"
+                alt="Student rapport photo"
+              >
+            </div>
+            <div>
+              <span>Rapport</span>
+              <h3>Trust With Families</h3>
+              <p>Clear communication and steady encouragement help students feel known, supported, and ready to take risks.</p>
+            </div>
+          </article>
         </div>
       </section>
     </main>
     <script type="module" src="globe.js"></script>
-    <script type="module" src="egg-drop.js?v=subtle-click-lines"></script>
-    <script src="home.js?v=modules"></script>
+    <script type="module" src="egg-drop.js?v=egg-milestones"></script>
+    <script src="home.js?v=rapport-crop"></script>
   </body>
 </html>

@@ -184,14 +184,82 @@ body {
   max-width: 620px;
 }
 
+.intro {
+  transition:
+    opacity 220ms ease,
+    transform 260ms ease;
+}
+
+.intro.is-swapping {
+  opacity: 0;
+  transform: translateY(10px);
+}
+
+.intro.is-proof-spotlight {
+  align-items: stretch;
+}
+
+.spotlight-media {
+  position: relative;
+  min-height: 430px;
+  overflow: hidden;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: rgba(255, 250, 242, 0.72);
+  box-shadow: 0 18px 34px rgba(31, 41, 51, 0.08);
+  cursor: pointer;
+}
+
+.spotlight-media img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  padding: 18px;
+  opacity: 0;
+  transition:
+    opacity 900ms ease,
+    transform 1400ms ease;
+}
+
+.spotlight-media img.is-active {
+  opacity: 1;
+}
+
+.spotlight-media.is-hovered img.is-active {
+  transform: scale(1.015);
+}
+
+.spotlight-copy {
+  align-self: center;
+  max-width: 620px;
+}
+
+.spotlight-copy h1 {
+  margin: 0 0 22px;
+  color: var(--ink);
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: clamp(42px, 6vw, 72px);
+  font-weight: 500;
+  line-height: 0.96;
+  letter-spacing: 0;
+}
+
+.spotlight-copy p {
+  font-size: clamp(18px, 2vw, 22px);
+  line-height: 1.55;
+}
+
 .egg-headline {
   position: relative;
 }
 
 .egg-drop-stage {
   position: absolute;
-  inset: -190px -34px -260px;
+  inset: -190px -86px -340px;
   z-index: 6;
+  overflow: hidden;
   pointer-events: auto;
 }
 
@@ -199,6 +267,59 @@ body {
   display: block;
   width: 100%;
   height: 100%;
+  -webkit-mask-image:
+    linear-gradient(to right, transparent 0%, #000 8%, #000 92%, transparent 100%),
+    linear-gradient(to bottom, transparent 0%, #000 7%, #000 93%, transparent 100%);
+  -webkit-mask-composite: source-in;
+  mask-image:
+    linear-gradient(to right, transparent 0%, #000 8%, #000 92%, transparent 100%),
+    linear-gradient(to bottom, transparent 0%, #000 7%, #000 93%, transparent 100%);
+  mask-composite: intersect;
+}
+
+.egg-counter {
+  position: absolute;
+  right: 12px;
+  bottom: 12px;
+  z-index: 8;
+  padding: 5px 8px;
+  color: rgba(42, 42, 38, 0.72);
+  border: 1px solid rgba(217, 207, 193, 0.75);
+  border-radius: 999px;
+  background: rgba(255, 250, 242, 0.58);
+  font-family: "Inter", "Segoe UI", sans-serif;
+  font-size: 11px;
+  font-weight: 800;
+  line-height: 1;
+  pointer-events: none;
+}
+
+.egg-milestone {
+  position: absolute;
+  right: 12px;
+  bottom: 38px;
+  z-index: 8;
+  max-width: 180px;
+  padding: 6px 9px;
+  color: rgba(42, 42, 38, 0.78);
+  border: 1px solid rgba(217, 207, 193, 0.78);
+  border-radius: 999px;
+  background: rgba(255, 250, 242, 0.7);
+  font-family: "Inter", "Segoe UI", sans-serif;
+  font-size: 12px;
+  font-weight: 900;
+  line-height: 1;
+  opacity: 0;
+  pointer-events: none;
+  transform: translateY(8px) scale(0.96);
+  transition:
+    opacity 220ms ease,
+    transform 260ms ease;
+}
+
+.egg-milestone.is-visible {
+  opacity: 1;
+  transform: translateY(0) scale(1);
 }
 
 .focus-modules {
@@ -298,6 +419,152 @@ body {
 
 .focus-module:not(.is-active):nth-child(2) {
   transform: translateX(-8%) translateY(24px) translateZ(-140px) rotateY(16deg) scale(0.92);
+}
+
+.proof-shelf {
+  width: min(1080px, 100%);
+  display: grid;
+  gap: 24px;
+}
+
+.proof-heading {
+  display: flex;
+  justify-content: space-between;
+  gap: 24px;
+  align-items: end;
+  padding-top: 20px;
+  border-top: 1px solid var(--line);
+}
+
+.proof-heading h2 {
+  margin: 0;
+  color: var(--ink);
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: clamp(34px, 5vw, 54px);
+  font-weight: 500;
+  line-height: 1;
+  letter-spacing: 0;
+}
+
+.proof-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 18px;
+}
+
+.proof-card {
+  min-width: 0;
+  display: grid;
+  grid-template-rows: 190px 1fr;
+  overflow: hidden;
+  transform-origin: center;
+  border: 1px solid rgba(217, 207, 193, 0.9);
+  border-radius: 8px;
+  background: rgba(255, 250, 242, 0.72);
+  box-shadow: 0 14px 30px rgba(31, 41, 51, 0.07);
+  transition:
+    opacity 180ms ease,
+    filter 180ms ease,
+    box-shadow 180ms ease,
+    transform 180ms ease;
+  cursor: pointer;
+}
+
+.proof-card:hover,
+.proof-card:focus-within {
+  box-shadow: 0 20px 38px rgba(47, 111, 115, 0.16);
+  transform: translateY(-6px) scale(1.025);
+}
+
+.proof-card.is-selected {
+  display: none;
+}
+
+.proof-card-return {
+  display: none;
+}
+
+.proof-card-return.is-visible {
+  display: grid;
+}
+
+.proof-card-egg {
+  display: grid;
+  place-items: center;
+  min-width: 0;
+  padding: 0;
+  border-bottom: 1px solid var(--line);
+  background:
+    radial-gradient(circle at center, rgba(255, 250, 242, 0.5), transparent 58%),
+    rgba(234, 228, 219, 0.52);
+}
+
+.proof-card-egg span {
+  width: 82px;
+  height: 108px;
+  margin: 0;
+  border: 3px solid rgba(42, 42, 38, 0.74);
+  border-radius: 50% 50% 45% 45% / 58% 58% 42% 42%;
+  background:
+    radial-gradient(circle at 35% 30%, rgba(76, 76, 70, 0.45) 0 2px, transparent 3px),
+    radial-gradient(circle at 64% 52%, rgba(76, 76, 70, 0.38) 0 1.5px, transparent 2.5px),
+    radial-gradient(circle at 46% 72%, rgba(76, 76, 70, 0.32) 0 2px, transparent 3px),
+    rgba(255, 255, 255, 0.18);
+}
+
+.proof-media {
+  position: relative;
+  min-width: 0;
+  overflow: hidden;
+  padding: 0;
+  border-bottom: 1px solid var(--line);
+  background: var(--surface);
+}
+
+.proof-media img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0;
+  border-bottom: 0;
+  filter: saturate(0.9);
+  transition:
+    opacity 700ms ease,
+    transform 1100ms ease;
+}
+
+.proof-media img.is-active {
+  opacity: 1;
+  transform: scale(1.025);
+}
+
+.proof-card > div:not(.proof-media) {
+  padding: 18px;
+}
+
+.proof-card span {
+  display: inline-block;
+  margin-bottom: 10px;
+  color: var(--accent);
+  font-size: 12px;
+  font-weight: 800;
+  text-transform: uppercase;
+}
+
+.proof-card h3 {
+  margin: 0 0 10px;
+  color: var(--ink);
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 24px;
+  font-weight: 600;
+  line-height: 1.12;
+}
+
+.proof-card p {
+  font-size: 15px;
+  line-height: 1.55;
 }
 
 .home-column {
@@ -930,6 +1197,18 @@ p + p {
 
   .focus-module:not(.is-active):nth-child(2) {
     transform: translateY(18px) translateZ(-100px) rotateX(8deg) scale(0.94);
+  }
+
+  .proof-heading {
+    display: block;
+  }
+
+  .proof-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .proof-card {
+    grid-template-rows: 170px 1fr;
   }
 
   .about-layout {

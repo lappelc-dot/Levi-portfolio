@@ -3,6 +3,9 @@ import * as THREE from "https://unpkg.com/three@0.165.0/build/three.module.js";
 const stage = document.querySelector(".egg-drop-stage");
 
 if (stage) {
+  const eggModes = (stage.dataset.eggMode || "default").split(/\s+/);
+  const isSingleRightMode = eggModes.includes("single-right");
+  const hasGlowMode = eggModes.includes("glow");
   const scene = new THREE.Scene();
   const camera = new THREE.PerspectiveCamera(32, 1, 0.1, 100);
   const renderer = new THREE.WebGLRenderer({ alpha: true, antialias: true });
@@ -12,8 +15,21 @@ if (stage) {
   const eggs = [];
   const books = [];
   const pops = [];
-  const maxEggs = 4;
-  const floorY = -1.78;
+  const maxEggs = isSingleRightMode ? 1 : 5;
+  const counter = stage.querySelector(".egg-counter");
+  const milestone = stage.querySelector(".egg-milestone");
+  const milestonePhrases = [
+    "New high score!",
+    "Wait, five more?",
+    "Okay, egg legend.",
+    "This is getting serious.",
+    "Shell dynasty unlocked!",
+    "How are there still eggs?"
+  ];
+  let hatchedEggs = 0;
+  let milestoneTimerId;
+  let spawnTimerId;
+  const floorY = -1.55;
   const gravity = -2.6;
   const shakeDelay = 3.8;
 
@@ -87,25 +103,42 @@ if (stage) {
 
   const createEgg = () => {
     if (eggs.length >= maxEggs) {
-      const oldestSettledEgg = eggs.find((existingEgg) => existingEgg.userData.isSettled);
-      if (oldestSettledEgg) {
-        removeEgg(oldestSettledEgg, eggs.indexOf(oldestSettledEgg));
-      } else {
-        return;
-      }
+      return;
     }
 
     const egg = new THREE.Group();
+    const makeGlowShell = () => new THREE.Mesh(
+      new THREE.SphereGeometry(0.36, 32, 32),
+      new THREE.MeshBasicMaterial({
+        color: 0xf4f1e8,
+        opacity: 0,
+        transparent: true,
+        depthWrite: false,
+        blending: THREE.AdditiveBlending
+      })
+    );
+    const glowOuter = makeGlowShell();
+    const glowMiddle = makeGlowShell();
+    const glowHalo = makeGlowShell();
+    const glow = makeGlowShell();
     const shell = new THREE.Mesh(eggGeometry, shellMaterial.clone());
     const outline = new THREE.Mesh(eggGeometry, outlineMaterial.clone());
     const shadow = new THREE.Mesh(new THREE.CircleGeometry(0.34, 36), shadowMaterial.clone());
-    const size = THREE.MathUtils.randFloat(0.32, 0.58);
+    const size = isSingleRightMode ? 0.76 : THREE.MathUtils.randFloat(0.3, 0.72);
     const freckleCount = THREE.MathUtils.randInt(18, 32);
     const eggHeightRadius = 0.36 * 1.18 * size;
 
+    glowOuter.scale.set(size * 0.78, size * 0.92, size * 0.78);
+    glowOuter.position.y = -0.015 * size;
+    glowMiddle.scale.set(size * 0.6, size * 0.72, size * 0.6);
+    glowMiddle.position.y = -0.015 * size;
+    glowHalo.scale.set(size * 0.48, size * 0.58, size * 0.48);
+    glowHalo.position.y = -0.015 * size;
+    glow.scale.set(size * 0.26, size * 0.32, size * 0.26);
+    glow.position.y = -0.015 * size;
     shell.scale.set(size * 0.82, size * 1.18, size * 0.82);
     outline.scale.set(size * 0.9, size * 1.26, size * 0.9);
-    egg.add(outline, shell);
+    egg.add(glowOuter, glowMiddle, glowHalo, glow, outline, shell);
 
     for (let index = 0; index < freckleCount; index += 1) {
       const freckleSize = THREE.MathUtils.randFloat(0.008, 0.02) * size;
@@ -119,7 +152,7 @@ if (stage) {
     }
 
     egg.position.set(
-      THREE.MathUtils.randFloat(-1.55, 1.2),
+      isSingleRightMode ? 1.18 : THREE.MathUtils.randFloat(-1.28, 1.02),
       2.4,
       THREE.MathUtils.randFloat(-0.25, 0.2)
     );
@@ -136,6 +169,10 @@ if (stage) {
       bounceRestitution: THREE.MathUtils.randFloat(0.36, 0.52),
       canHatch: false,
       floorCenterY: floorY + eggHeightRadius,
+      glow,
+      glowHalo,
+      glowMiddle,
+      glowOuter,
       isEgg: true,
       isSettled: false,
       lateralDamping: THREE.MathUtils.randFloat(0.68, 0.82),
@@ -260,10 +297,15 @@ if (stage) {
   };
 
   const scheduleEgg = () => {
-    window.setTimeout(() => {
+    if (isSingleRightMode || spawnTimerId) {
+      return;
+    }
+
+    spawnTimerId = window.setTimeout(() => {
+      spawnTimerId = undefined;
       createEgg();
       scheduleEgg();
-    }, THREE.MathUtils.randInt(14000, 28000));
+    }, THREE.MathUtils.randInt(5000, 18000));
   };
 
   const removeEgg = (egg, index) => {
@@ -300,6 +342,23 @@ if (stage) {
     createClickPop(popPosition);
     createBook(egg.position.clone());
     removeEgg(egg, eggs.indexOf(egg));
+    hatchedEggs += 1;
+
+    if (counter) {
+      counter.textContent = `Hatched Eggs: ${hatchedEggs}`;
+    }
+
+    if (milestone && hatchedEggs % 5 === 0) {
+      const milestoneIndex = Math.min((hatchedEggs / 5) - 1, milestonePhrases.length - 1);
+      milestone.textContent = milestonePhrases[milestoneIndex];
+      milestone.classList.add("is-visible");
+      window.clearTimeout(milestoneTimerId);
+      milestoneTimerId = window.setTimeout(() => {
+        milestone.classList.remove("is-visible");
+      }, 2400);
+    }
+
+    scheduleEgg();
   };
 
   const findEggGroup = (object) => {
@@ -407,9 +466,24 @@ if (stage) {
           } else {
             egg.rotation.z += Math.sin((egg.userData.settledAge * 3) + egg.userData.shakePhase) * delta * 0.025;
           }
+
+          if (hasGlowMode && egg.userData.glow) {
+            const glowPulse = 0.1 + Math.abs(Math.sin(egg.userData.settledAge * 5)) * 0.16;
+            egg.userData.glow.material.opacity = glowPulse * 0.58;
+            egg.userData.glowHalo.material.opacity = glowPulse * 0.5;
+            egg.userData.glowMiddle.material.opacity = glowPulse * 0.62;
+            egg.userData.glowOuter.material.opacity = glowPulse * 0.38;
+          }
         } else {
           const settle = Math.max(0, 1 - egg.userData.settledAge / 1.8);
           egg.rotation.z += Math.sin((egg.userData.settledAge * 9) + egg.userData.shakePhase) * delta * 0.05 * settle;
+
+          if (egg.userData.glow) {
+            egg.userData.glow.material.opacity = 0;
+            egg.userData.glowHalo.material.opacity = 0;
+            egg.userData.glowMiddle.material.opacity = 0;
+            egg.userData.glowOuter.material.opacity = 0;
+          }
         }
       }
     }
