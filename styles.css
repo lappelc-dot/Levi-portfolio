@@ -1118,9 +1118,9 @@ p + p {
   }
 
   .home-page {
-    gap: 44px;
+    gap: 76px;
     padding-top: 28px;
-    padding-bottom: 56px;
+    padding-bottom: 82px;
   }
 
   .resume-page {
@@ -1174,7 +1174,20 @@ p + p {
 
   .intro {
     grid-template-columns: 1fr;
-    gap: 32px;
+    gap: 46px;
+    margin-bottom: 24px;
+  }
+
+  .intro-copy {
+    padding-bottom: 96px;
+  }
+
+  .egg-headline {
+    margin-bottom: 38px;
+  }
+
+  .egg-drop-stage {
+    inset: -150px -42px -300px;
   }
 
   .focus-modules {
@@ -1201,6 +1214,11 @@ p + p {
 
   .proof-heading {
     display: block;
+    padding-top: 32px;
+  }
+
+  .proof-shelf {
+    gap: 34px;
   }
 
   .proof-grid {
