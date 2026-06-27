@@ -371,10 +371,73 @@ body {
   pointer-events: none;
 }
 
+.egg-counter.is-secret {
+  color: rgba(42, 42, 38, 0.86);
+  background: rgba(255, 247, 185, 0.76);
+  pointer-events: auto;
+}
+
+.egg-counter a {
+  color: inherit;
+  text-decoration: none;
+}
+
+.egg-counter a:hover,
+.egg-counter a:focus-visible {
+  color: var(--accent);
+}
+
+.egg-achievements {
+  position: absolute;
+  right: 14px;
+  bottom: 40px;
+  z-index: 8;
+  display: flex;
+  gap: 6px;
+  align-items: end;
+  pointer-events: none;
+}
+
+.egg-badge {
+  display: block;
+  width: 15px;
+  height: 20px;
+  border: 1.8px solid rgba(42, 42, 38, 0.66);
+  border-radius: 50% 50% 45% 45% / 58% 58% 42% 42%;
+  opacity: 0;
+  transform: translateY(6px) scale(0.72) rotate(-6deg);
+  transition:
+    opacity 220ms ease,
+    transform 260ms ease;
+}
+
+.egg-badge.is-visible {
+  opacity: 1;
+  transform: translateY(0) scale(1) rotate(-6deg);
+}
+
+.egg-badge-yellow {
+  background:
+    radial-gradient(circle at 38% 35%, rgba(42, 42, 38, 0.22) 0 1px, transparent 2px),
+    #f4d565;
+}
+
+.egg-badge-blue {
+  background:
+    radial-gradient(circle at 58% 42%, rgba(42, 42, 38, 0.22) 0 1px, transparent 2px),
+    #8eb9df;
+}
+
+.egg-badge-green {
+  background:
+    radial-gradient(circle at 44% 62%, rgba(42, 42, 38, 0.22) 0 1px, transparent 2px),
+    #8fc88b;
+}
+
 .egg-milestone {
   position: absolute;
   right: 12px;
-  bottom: 38px;
+  bottom: 66px;
   z-index: 8;
   max-width: 180px;
   padding: 6px 9px;
@@ -597,6 +660,11 @@ body {
 
 .page-copy h1 {
   max-width: 13ch;
+}
+
+.secret-page {
+  padding-top: 18px;
+  border-top: 1px solid rgba(47, 111, 115, 0.22);
 }
 
 .contact-list {

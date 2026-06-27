@@ -18,6 +18,11 @@ if (stage) {
   const maxEggs = isSingleRightMode ? 1 : 5;
   const counter = stage.querySelector(".egg-counter");
   const milestone = stage.querySelector(".egg-milestone");
+  const achievementBadges = {
+    yellow: stage.querySelector(".egg-badge-yellow"),
+    blue: stage.querySelector(".egg-badge-blue"),
+    green: stage.querySelector(".egg-badge-green")
+  };
   const milestonePhrases = [
     "New high score!",
     "Wait, five more?",
@@ -331,6 +336,17 @@ if (stage) {
     }, 2000);
   };
 
+  const updateAchievements = () => {
+    achievementBadges.yellow?.classList.toggle("is-visible", hatchedEggs >= 5);
+    achievementBadges.blue?.classList.toggle("is-visible", hatchedEggs >= 10);
+    achievementBadges.green?.classList.toggle("is-visible", hatchedEggs >= 15);
+
+    if (counter && hatchedEggs >= 15) {
+      counter.classList.add("is-secret");
+      counter.innerHTML = '<a href="easter-egg.html">Secret unlocked!</a>';
+    }
+  };
+
   const removeEgg = (egg, index) => {
     const shadow = egg.userData.shadow;
 
@@ -370,6 +386,8 @@ if (stage) {
     if (counter) {
       counter.textContent = `Hatched Eggs: ${hatchedEggs}`;
     }
+
+    updateAchievements();
 
     if (milestone && hatchedEggs % 5 === 0) {
       const milestoneIndex = Math.min((hatchedEggs / 5) - 1, milestonePhrases.length - 1);
