@@ -185,6 +185,13 @@ body {
   max-width: 620px;
 }
 
+.intro-copy > .eyebrow,
+.intro-copy > h1,
+.intro-copy > p {
+  position: relative;
+  z-index: 7;
+}
+
 .intro {
   transition:
     opacity 220ms ease,
@@ -1281,7 +1288,7 @@ p + p {
   }
 
   .intro-copy {
-    padding-bottom: 0;
+    padding-bottom: 166px;
   }
 
   .egg-headline {
@@ -1289,8 +1296,17 @@ p + p {
   }
 
   .egg-drop-stage {
+    position: absolute;
+    top: 59px;
+    right: -18px;
+    left: -18px;
+    width: auto;
     height: 300px;
-    margin-top: 28px;
+    margin-top: 0;
+    border-top: 0;
+    background:
+      linear-gradient(to bottom, transparent 0%, rgba(255, 250, 242, 0.24) 36%, transparent 70%),
+      radial-gradient(ellipse at center 88%, rgba(47, 111, 115, 0.08), transparent 56%);
   }
 
   .focus-modules {
