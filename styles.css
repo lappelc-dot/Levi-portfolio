@@ -1298,18 +1298,38 @@ p + p {
   .proof-heading {
     display: block;
     padding-top: 32px;
+    padding-right: 18px;
+    padding-left: 18px;
   }
 
   .proof-shelf {
+    width: calc(100% + 36px);
+    margin-right: -18px;
+    margin-left: -18px;
     gap: 34px;
   }
 
   .proof-grid {
-    grid-template-columns: 1fr;
+    display: flex;
+    gap: 16px;
+    overflow-x: auto;
+    padding: 2px 18px 18px;
+    scroll-padding-inline: 18px;
+    scroll-snap-type: x mandatory;
+    scrollbar-width: thin;
+    scrollbar-color: rgba(47, 111, 115, 0.38) transparent;
   }
 
   .proof-card {
+    flex: 0 0 min(82vw, 360px);
     grid-template-rows: 170px 1fr;
+    scroll-snap-align: center;
+    scroll-snap-stop: always;
+  }
+
+  .proof-card:hover,
+  .proof-card:focus-within {
+    transform: translateY(-3px) scale(1.01);
   }
 
   .about-layout {
