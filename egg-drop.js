@@ -31,7 +31,7 @@ if (stage) {
   let spawnTimerId;
   let hatchSpawnTimerId;
   const baseSpawnMin = 5000;
-  const baseSpawnMax = 18000;
+  const baseSpawnMax = 12000;
   const fastestSpawnMin = 2200;
   const fastestSpawnMax = 7600;
   const spawnSpeedupPerHatch = 0.08;
