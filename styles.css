@@ -1270,7 +1270,24 @@ p + p {
   }
 
   .egg-drop-stage {
-    inset: -150px -42px -390px;
+    top: -150px;
+    right: -18px;
+    bottom: -390px;
+    left: auto;
+    width: 118px;
+  }
+
+  .egg-counter {
+    right: 4px;
+    transform: scale(0.84);
+    transform-origin: right bottom;
+  }
+
+  .egg-milestone {
+    right: 4px;
+    max-width: 112px;
+    transform: translateY(8px) scale(0.84);
+    transform-origin: right bottom;
   }
 
   .focus-modules {

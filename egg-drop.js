@@ -29,6 +29,12 @@ if (stage) {
   let hatchedEggs = 0;
   let milestoneTimerId;
   let spawnTimerId;
+  let hatchSpawnTimerId;
+  const baseSpawnMin = 5000;
+  const baseSpawnMax = 18000;
+  const fastestSpawnMin = 2200;
+  const fastestSpawnMax = 7600;
+  const spawnSpeedupPerHatch = 0.08;
   const floorY = -1.55;
   const gravity = -2.6;
   const shakeDelay = 3.8;
@@ -303,11 +309,26 @@ if (stage) {
       return;
     }
 
+    const speedup = Math.min(0.72, hatchedEggs * spawnSpeedupPerHatch);
+    const minDelay = Math.max(fastestSpawnMin, baseSpawnMin * (1 - speedup));
+    const maxDelay = Math.max(fastestSpawnMax, baseSpawnMax * (1 - speedup));
+
     spawnTimerId = window.setTimeout(() => {
       spawnTimerId = undefined;
       createEgg();
       scheduleEgg();
-    }, THREE.MathUtils.randInt(5000, 18000));
+    }, THREE.MathUtils.randInt(minDelay, maxDelay));
+  };
+
+  const scheduleHatchEgg = () => {
+    if (isSingleRightMode || hatchSpawnTimerId) {
+      return;
+    }
+
+    hatchSpawnTimerId = window.setTimeout(() => {
+      hatchSpawnTimerId = undefined;
+      createEgg();
+    }, 2000);
   };
 
   const removeEgg = (egg, index) => {
@@ -361,6 +382,7 @@ if (stage) {
     }
 
     scheduleEgg();
+    scheduleHatchEgg();
   };
 
   const findEggGroup = (object) => {
