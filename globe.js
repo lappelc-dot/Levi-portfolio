@@ -10,6 +10,7 @@ if (container) {
   const globeGroup = new THREE.Group();
   const globeRadius = 1.2;
   const fullRotationSeconds = 24;
+  const savedStateKey = "levi-location-globe-rotation";
   const clock = new THREE.Clock();
 
   renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
@@ -123,8 +124,29 @@ if (container) {
 
   globeGroup.add(pinBase, pinStem, pinHead);
 
+  const getSavedRotation = () => {
+    try {
+      return JSON.parse(window.sessionStorage.getItem(savedStateKey));
+    } catch {
+      return null;
+    }
+  };
+
+  const saveRotation = () => {
+    try {
+      window.sessionStorage.setItem(savedStateKey, JSON.stringify({
+        globeY: globeGroup.rotation.y,
+        cloudsY: clouds.rotation.y
+      }));
+    } catch {
+      // The globe can still spin normally if browser storage is unavailable.
+    }
+  };
+
+  const savedRotation = getSavedRotation();
   globeGroup.rotation.x = -0.16;
-  globeGroup.rotation.y = -2.42;
+  globeGroup.rotation.y = Number.isFinite(savedRotation?.globeY) ? savedRotation.globeY : -2.42;
+  clouds.rotation.y = Number.isFinite(savedRotation?.cloudsY) ? savedRotation.cloudsY : 0;
 
   const resize = () => {
     const width = Math.max(1, container.clientWidth);
@@ -146,5 +168,7 @@ if (container) {
 
   resize();
   animate();
+  window.addEventListener("pagehide", saveRotation);
+  window.addEventListener("beforeunload", saveRotation);
   window.addEventListener("resize", resize);
 }

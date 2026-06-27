@@ -66,12 +66,23 @@ if (evidenceSpotlight && spotlightCards.length > 0 && spotlightReturn) {
     const media = evidenceSpotlight.querySelector(".spotlight-media");
     const slides = Array.from(evidenceSpotlight.querySelectorAll(".spotlight-media img"));
     let currentIndex = 0;
-    const calmDelay = 6200;
-    const hoverDelay = 1900;
+    const calmDelay = 1800;
 
     if (slides.length <= 1) {
       return;
     }
+
+    const previousButton = document.createElement("button");
+    previousButton.className = "spotlight-arrow spotlight-arrow-prev";
+    previousButton.type = "button";
+    previousButton.setAttribute("aria-label", "Previous image");
+
+    const nextButton = document.createElement("button");
+    nextButton.className = "spotlight-arrow spotlight-arrow-next";
+    nextButton.type = "button";
+    nextButton.setAttribute("aria-label", "Next image");
+
+    media?.append(previousButton, nextButton);
 
     const showSlide = (index) => {
       currentIndex = (index + slides.length) % slides.length;
@@ -92,14 +103,26 @@ if (evidenceSpotlight && spotlightCards.length > 0 && spotlightReturn) {
       spotlightTimerId = window.setInterval(advance, delay);
     };
 
-    media?.addEventListener("click", () => {
-      advance();
-      startTimer(media.matches(":hover") ? hoverDelay : calmDelay);
+    previousButton.addEventListener("click", (event) => {
+      event.stopPropagation();
+      showSlide(currentIndex - 1);
+    });
+
+    nextButton.addEventListener("click", (event) => {
+      event.stopPropagation();
+      showSlide(currentIndex + 1);
+    });
+
+    media?.addEventListener("click", (event) => {
+      event.stopPropagation();
+      const mediaRect = media.getBoundingClientRect();
+      const direction = event.clientX < mediaRect.left + (mediaRect.width / 2) ? -1 : 1;
+      showSlide(currentIndex + direction);
     });
 
     media?.addEventListener("mouseenter", () => {
       media.classList.add("is-hovered");
-      startTimer(hoverDelay);
+      clearSpotlightTimer();
     });
 
     media?.addEventListener("mouseleave", () => {
@@ -133,6 +156,13 @@ if (evidenceSpotlight && spotlightCards.length > 0 && spotlightReturn) {
 
       window.requestAnimationFrame(() => {
         evidenceSpotlight.classList.remove("is-swapping");
+
+        if (mode === "proof") {
+          evidenceSpotlight.scrollIntoView({
+            behavior: "smooth",
+            block: "start"
+          });
+        }
       });
     }, 160);
   };
@@ -190,45 +220,6 @@ if (evidenceSpotlight && spotlightCards.length > 0 && spotlightReturn) {
     handleKeyboardClick(event, showIntro);
   });
 }
-
-const proofSlideshows = document.querySelectorAll("[data-proof-slideshow]");
-
-proofSlideshows.forEach((card) => {
-  const slides = Array.from(card.querySelectorAll(".proof-media img"));
-  let currentIndex = 0;
-  let timerId;
-
-  if (slides.length <= 1) {
-    return;
-  }
-
-  const showSlide = (index) => {
-    currentIndex = (index + slides.length) % slides.length;
-    slides.forEach((slide, slideIndex) => {
-      slide.classList.toggle("is-active", slideIndex === currentIndex);
-    });
-  };
-
-  const start = () => {
-    window.clearInterval(timerId);
-    timerId = window.setInterval(() => {
-      showSlide(currentIndex + 1);
-    }, 1500);
-  };
-
-  const stop = () => {
-    window.clearInterval(timerId);
-    timerId = undefined;
-    showSlide(0);
-  };
-
-  card.addEventListener("mouseenter", start);
-  card.addEventListener("mouseleave", stop);
-  card.addEventListener("focusin", start);
-  card.addEventListener("focusout", stop);
-
-  showSlide(0);
-});
 
 slideshows.forEach((slideshow) => {
   const slides = Array.from(slideshow.querySelectorAll("img"));

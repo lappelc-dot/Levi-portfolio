@@ -184,6 +184,7 @@ if (stage) {
       shakePhase: THREE.MathUtils.randFloat(0, Math.PI * 2),
       shadow,
       shadowBaseSize: size,
+      size,
       spin: THREE.MathUtils.randFloat(-1.35, 1.35),
       velocityX: THREE.MathUtils.randFloat(-0.08, 0.08),
       velocityY: THREE.MathUtils.randFloat(-0.34, -0.08),
@@ -220,7 +221,7 @@ if (stage) {
     return panel;
   };
 
-  const createBook = (position) => {
+  const createBook = (position, eggSize = 1) => {
     const book = new THREE.Group();
     const leftPage = makeBookPanel(-0.105, 0.12);
     const rightPage = makeBookPanel(0.105, -0.12);
@@ -253,11 +254,12 @@ if (stage) {
     }
 
     book.position.copy(position);
-    book.position.y += 0.22;
+    book.position.y += 0.18 + eggSize * 0.08;
     book.rotation.set(-0.16, 0, THREE.MathUtils.randFloat(-0.18, 0.18));
+    book.scale.setScalar(THREE.MathUtils.clamp(eggSize * 1.65, 0.5, 1.35));
     book.userData = {
       age: 0,
-      velocityY: 0.82
+      velocityY: 0.92
     };
 
     books.push(book);
@@ -340,7 +342,7 @@ if (stage) {
     }
 
     createClickPop(popPosition);
-    createBook(egg.position.clone());
+    createBook(egg.position.clone(), egg.userData.size);
     removeEgg(egg, eggs.indexOf(egg));
     hatchedEggs += 1;
 
@@ -491,11 +493,11 @@ if (stage) {
     for (let index = books.length - 1; index >= 0; index -= 1) {
       const book = books[index];
       book.userData.age += delta;
-      book.userData.velocityY -= 1.2 * delta;
+      book.userData.velocityY -= 1.45 * delta;
       book.position.y += book.userData.velocityY * delta;
-      book.rotation.z += delta * 0.22;
+      book.rotation.z += delta * 0.32;
 
-      const fade = THREE.MathUtils.clamp((2.3 - book.userData.age) / 0.8, 0, 1);
+      const fade = THREE.MathUtils.clamp((1.9 - book.userData.age) / 0.62, 0, 1);
       setGroupOpacity(book, fade);
 
       if (fade <= 0) {
