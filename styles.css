@@ -825,6 +825,29 @@ body {
   padding-top: 12px;
 }
 
+.references-list {
+  margin-top: 34px;
+  padding-top: 18px;
+  border-top: 1px solid var(--line);
+}
+
+.references-list h2 {
+  margin: 0 0 14px;
+  color: var(--ink);
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 28px;
+  font-weight: 600;
+}
+
+.references-list p {
+  font-size: 15px;
+  overflow-wrap: anywhere;
+}
+
+.references-list a {
+  color: var(--accent);
+}
+
 .contact-list {
   display: grid;
   gap: 12px;
