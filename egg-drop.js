@@ -343,7 +343,7 @@ if (stage) {
 
     if (counter && hatchedEggs >= 15) {
       counter.classList.add("is-secret");
-      counter.innerHTML = '<a href="easter-egg.html">Secret unlocked!</a>';
+      counter.innerHTML = '<a href="easter-egg/">Secret unlocked!</a>';
     }
   };
 
