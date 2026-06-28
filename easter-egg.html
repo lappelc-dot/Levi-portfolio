@@ -33,9 +33,13 @@
 
       <section class="page-copy secret-page gamer-secret">
         <div class="egg-race-track" aria-hidden="true">
-          <svg class="track-line" viewBox="0 0 980 720" preserveAspectRatio="none" focusable="false">
+          <svg class="track-line arcade-street" viewBox="0 0 980 720" preserveAspectRatio="none" focusable="false">
             <defs>
-              <path id="egg-race-road" d="M -80 642 C 112 648 168 514 322 502 C 472 491 570 540 664 526 C 746 514 758 474 832 502 C 928 539 846 672 890 716 C 966 792 1054 662 1110 584" />
+              <path id="egg-race-road" d="M -80 597 C 160 597 325 597 490 597 C 660 597 820 597 1060 597" />
+              <pattern id="street-window-pattern" width="18" height="26" patternUnits="userSpaceOnUse">
+                <rect x="4" y="7" width="5" height="8" />
+                <rect x="12" y="7" width="5" height="8" />
+              </pattern>
               <symbol id="egg-kart-symbol" viewBox="0 0 104 68">
                 <path class="kart-shadow" d="M9 56 C28 62 74 62 93 56 L88 64 L14 64 Z" />
                 <path class="kart-pipe" d="M7 28 L25 20 L34 28 L16 39 Z" />
@@ -58,15 +62,21 @@
                 <path class="kart-highlight" d="M35 43 C46 39 58 39 68 44" />
               </symbol>
             </defs>
-            <use class="road-edge" href="#egg-race-road" />
-            <use class="road-surface" href="#egg-race-road" />
-            <use class="road-centerline" href="#egg-race-road" />
+            <image
+              class="highway-reference-image"
+              href="resources/images/Easter-eggs/Highway.png"
+              x="-90"
+              y="420"
+              width="1160"
+              height="300"
+              preserveAspectRatio="none"
+            />
             <g class="svg-egg-racer svg-egg-racer-one">
               <animateMotion dur="10.6s" repeatCount="indefinite" rotate="auto">
                 <mpath href="#egg-race-road" />
               </animateMotion>
               <g class="kart-bounce">
-                <use class="retro-kart" href="#egg-kart-symbol" style="--racer-egg-color: #f2dfd5;" transform="translate(-3 -8) scale(0.04)" />
+                <use class="retro-kart" href="#egg-kart-symbol" style="--racer-egg-color: #e86e73;" transform="translate(-3 -8) scale(0.04)" />
               </g>
             </g>
             <g class="svg-egg-racer svg-egg-racer-two">
@@ -90,7 +100,7 @@
                 <mpath href="#egg-race-road" />
               </animateMotion>
               <g class="kart-bounce">
-                <use class="retro-kart" href="#egg-kart-symbol" style="--racer-egg-color: #8fc88b;" transform="translate(-3 -8) scale(0.04)" />
+                <use class="retro-kart" href="#egg-kart-symbol" style="--racer-egg-color: #ef9fc1;" transform="translate(-3 -8) scale(0.04)" />
               </g>
             </g>
           </svg>
@@ -105,6 +115,13 @@
           class="secret-margin-image secret-margin-image-lower"
           src="resources/images/Easter-eggs/mario-kart-wii-retro-art-banner.jpg"
           alt="Mario Kart artwork"
+        >
+
+        <img
+          class="secret-star"
+          src="resources/images/Easter-eggs/Star.gif"
+          alt=""
+          aria-hidden="true"
         >
 
         <div class="secret-copy">
@@ -141,5 +158,6 @@
       </section>
     </main>
     <script type="module" src="globe.js"></script>
+    <script type="module" src="easter-egg.js"></script>
   </body>
 </html>

@@ -42,7 +42,7 @@ if (stage) {
   const spawnSpeedupPerHatch = 0.08;
   const floorY = -1.55;
   const gravity = -2.6;
-  const shakeDelay = 3.8;
+  const shakeDelay = 3.02;
 
   renderer.setClearColor(0x000000, 0);
   renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
