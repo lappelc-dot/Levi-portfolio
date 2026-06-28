@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=1200">
     <title>Easter-Egg Page | Levi Caribou Lappe</title>
-    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="styles.css?v=site-20260628">
   </head>
   <body>
     <main class="page-shell page-shell-simple" aria-label="Easter egg page">
@@ -31,16 +31,113 @@
         </nav>
       </header>
 
-      <section class="page-copy secret-page">
-        <p class="eyebrow">Secret Unlocked</p>
-        <h1>Easter-Egg Page</h1>
-        <p>
-          You found the hidden shelf. Fifteen hatched eggs is enough evidence:
-          curiosity belongs in the classroom.
-        </p>
-        <p>
-          Every good reader knows there is always another page somewhere.
-        </p>
+      <section class="page-copy secret-page gamer-secret">
+        <div class="egg-race-track" aria-hidden="true">
+          <svg class="track-line" viewBox="0 0 980 720" preserveAspectRatio="none" focusable="false">
+            <defs>
+              <path id="egg-race-road" d="M -80 642 C 112 648 168 514 322 502 C 472 491 570 540 664 526 C 746 514 758 474 832 502 C 928 539 846 672 890 716 C 966 792 1054 662 1110 584" />
+              <symbol id="egg-kart-symbol" viewBox="0 0 104 68">
+                <path class="kart-shadow" d="M9 56 C28 62 74 62 93 56 L88 64 L14 64 Z" />
+                <path class="kart-pipe" d="M7 28 L25 20 L34 28 L16 39 Z" />
+                <path class="kart-pipe kart-pipe-top" d="M4 20 L22 12 L32 21 L14 32 Z" />
+                <path class="kart-seat" d="M39 22 C37 12 44 7 53 10 L56 32 L44 35 Z" />
+                <ellipse class="racer-egg" cx="54" cy="15" rx="11" ry="15" />
+                <circle class="egg-freckle egg-freckle-one" cx="50" cy="11" r="1.7" />
+                <circle class="egg-freckle egg-freckle-two" cx="58" cy="17" r="1.4" />
+                <path class="egg-shine" d="M48 8 C51 5 56 5 59 8" />
+                <path class="kart-frame" d="M28 37 C39 28 57 29 72 35 L96 43 L88 53 L27 53 Z" />
+                <path class="kart-nose" d="M68 31 C81 31 94 38 101 48 L88 53 L72 44 Z" />
+                <path class="kart-side" d="M30 42 C43 36 57 36 72 43 L66 55 L28 55 Z" />
+                <path class="kart-bumper" d="M73 53 L94 53" />
+                <circle class="kart-wheel kart-wheel-rear" cx="22" cy="52" r="14" />
+                <circle class="kart-wheel-hub" cx="22" cy="52" r="6" />
+                <circle class="kart-wheel kart-wheel-front" cx="78" cy="54" r="10" />
+                <circle class="kart-wheel-hub" cx="78" cy="54" r="4" />
+                <path class="wheel-mark" d="M15 46 L29 58 M29 46 L15 58" />
+                <path class="wheel-mark wheel-mark-front" d="M74 50 L82 58 M82 50 L74 58" />
+                <path class="kart-highlight" d="M35 43 C46 39 58 39 68 44" />
+              </symbol>
+            </defs>
+            <use class="road-edge" href="#egg-race-road" />
+            <use class="road-surface" href="#egg-race-road" />
+            <use class="road-centerline" href="#egg-race-road" />
+            <g class="svg-egg-racer svg-egg-racer-one">
+              <animateMotion dur="10.6s" repeatCount="indefinite" rotate="auto">
+                <mpath href="#egg-race-road" />
+              </animateMotion>
+              <g class="kart-bounce">
+                <use class="retro-kart" href="#egg-kart-symbol" style="--racer-egg-color: #f2dfd5;" transform="translate(-3 -8) scale(0.04)" />
+              </g>
+            </g>
+            <g class="svg-egg-racer svg-egg-racer-two">
+              <animateMotion dur="12s" begin="-3s" repeatCount="indefinite" rotate="auto">
+                <mpath href="#egg-race-road" />
+              </animateMotion>
+              <g class="kart-bounce">
+                <use class="retro-kart" href="#egg-kart-symbol" style="--racer-egg-color: #f4d565;" transform="translate(-3 -8) scale(0.04)" />
+              </g>
+            </g>
+            <g class="svg-egg-racer svg-egg-racer-three">
+              <animateMotion dur="12.8s" begin="-6.4s" repeatCount="indefinite" rotate="auto">
+                <mpath href="#egg-race-road" />
+              </animateMotion>
+              <g class="kart-bounce">
+                <use class="retro-kart" href="#egg-kart-symbol" style="--racer-egg-color: #8eb9df;" transform="translate(-3 -8) scale(0.04)" />
+              </g>
+            </g>
+            <g class="svg-egg-racer svg-egg-racer-four">
+              <animateMotion dur="13.6s" begin="-9.2s" repeatCount="indefinite" rotate="auto">
+                <mpath href="#egg-race-road" />
+              </animateMotion>
+              <g class="kart-bounce">
+                <use class="retro-kart" href="#egg-kart-symbol" style="--racer-egg-color: #8fc88b;" transform="translate(-3 -8) scale(0.04)" />
+              </g>
+            </g>
+          </svg>
+        </div>
+
+        <img loading="lazy" decoding="async"
+          class="secret-margin-image secret-margin-image-right"
+          src="resources/images/Easter-eggs/shadow-of-the-colossus.webp"
+          alt="Shadow of the Colossus artwork"
+        >
+        <img loading="lazy" decoding="async"
+          class="secret-margin-image secret-margin-image-lower"
+          src="resources/images/Easter-eggs/mario-kart-wii-retro-art-banner.jpg"
+          alt="Mario Kart artwork"
+        >
+
+        <div class="secret-copy">
+          <p class="eyebrow">Secret Unlocked</p>
+          <h1>Easter-Egg Page</h1>
+          <p>
+            I'm not just a book fan, but I'm an avid gamer.
+          </p>
+          <dl class="gamer-list">
+            <div>
+              <dt>Favorite games</dt>
+              <dd>The Legend of Zelda: Ocarina of Time, Shadow of the Colossus, Bloodborne</dd>
+            </div>
+            <div>
+              <dt>Currently playing</dt>
+              <dd>Monster Hunter 4 Generations Ultimate</dd>
+            </div>
+            <div>
+              <dt>Excited for</dt>
+              <dd>About Fishing, Ocarina of Time Remake</dd>
+            </div>
+            <div>
+              <dt>Consoles</dt>
+              <dd>PS5 / Switch 2 / PC</dd>
+            </div>
+          </dl>
+        </div>
+
+        <img loading="lazy" decoding="async"
+          class="secret-zelda-gif"
+          src="resources/images/Easter-eggs/Zelda.gif"
+          alt="The Legend of Zelda: Ocarina of Time scene"
+        >
       </section>
     </main>
     <script type="module" src="globe.js"></script>

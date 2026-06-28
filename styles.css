@@ -635,23 +635,156 @@ body {
   padding-top: 120px;
 }
 
-.about-image-placeholder {
+.about-drawer-stack {
   position: sticky;
   top: 150px;
   width: 100%;
-  aspect-ratio: 4 / 5;
+  min-height: 420px;
   display: grid;
-  place-items: center;
+  gap: 18px;
+  justify-items: start;
+}
+
+.about-image-drawer {
+  width: 44px;
+  min-height: 420px;
+  display: grid;
+  grid-template-columns: 44px 0;
+  margin: 0;
+  overflow: hidden;
   border: 1px solid var(--line);
   border-radius: 8px;
-  background:
-    linear-gradient(135deg, transparent 49%, rgba(47, 111, 115, 0.22) 50%, transparent 51%),
-    linear-gradient(45deg, transparent 49%, rgba(47, 111, 115, 0.22) 50%, transparent 51%),
-    var(--surface);
-  color: var(--muted);
-  font-size: 15px;
-  font-weight: 700;
+  background: var(--surface);
+  box-shadow: 0 18px 38px rgba(31, 41, 51, 0.08);
+  transition:
+    width 260ms ease,
+    grid-template-columns 260ms ease,
+    transform 220ms ease,
+    box-shadow 220ms ease;
+}
+
+.about-image-drawer:hover,
+.about-image-drawer:focus-within {
+  width: 464px;
+  grid-template-columns: 44px 420px;
+  transform: translateX(8px);
+  box-shadow: 0 24px 46px rgba(47, 111, 115, 0.14);
+}
+
+.about-image-drawer figcaption {
+  display: grid;
+  place-items: center;
+  padding: 14px 0;
+  border-right: 1px solid rgba(217, 207, 193, 0.82);
+  background: rgba(245, 241, 234, 0.92);
+  color: var(--accent);
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 0.04em;
   text-transform: uppercase;
+  writing-mode: vertical-rl;
+  transform: rotate(180deg);
+}
+
+.about-drawer-slides {
+  position: relative;
+  width: 420px;
+  height: 100%;
+  min-height: 420px;
+  opacity: 0;
+  transform: translateX(-18px) scale(1.04);
+  transition:
+    opacity 220ms ease,
+    transform 260ms ease;
+}
+
+.about-drawer-slides img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  background: rgba(245, 241, 234, 0.82);
+  filter: saturate(0.94) contrast(0.98);
+}
+
+.about-drawer-slides img:nth-child(1) {
+  animation: aboutSlideFadeOne 12s ease-in-out infinite;
+}
+
+.about-family-drawer .about-drawer-slides {
+  background:
+    linear-gradient(135deg, rgba(245, 241, 234, 0.92), rgba(232, 225, 214, 0.88));
+}
+
+.about-family-drawer .about-drawer-slides img {
+  box-sizing: border-box;
+  background:
+    linear-gradient(135deg, rgba(245, 241, 234, 0.98), rgba(232, 225, 214, 0.96));
+  object-fit: contain;
+  padding: 12px;
+}
+
+.about-drawer-slides img:nth-child(2) {
+  opacity: 0;
+  animation: aboutSlideFadeTwo 12s ease-in-out infinite;
+}
+
+.about-drawer-slides img:nth-child(3) {
+  opacity: 0;
+  animation: aboutSlideFadeThree 12s ease-in-out infinite;
+}
+
+.about-image-drawer:hover .about-drawer-slides,
+.about-image-drawer:focus-within .about-drawer-slides {
+  opacity: 1;
+  transform: translateX(0) scale(1);
+}
+
+.about-image-drawer:hover .about-drawer-slides img,
+.about-image-drawer:focus-within .about-drawer-slides img {
+  animation-play-state: running;
+}
+
+@keyframes aboutSlideFadeOne {
+  0%,
+  26%,
+  94%,
+  100% {
+    opacity: 1;
+  }
+
+  36%,
+  88% {
+    opacity: 0;
+  }
+}
+
+@keyframes aboutSlideFadeTwo {
+  0%,
+  27%,
+  68%,
+  100% {
+    opacity: 0;
+  }
+
+  35%,
+  60% {
+    opacity: 1;
+  }
+}
+
+@keyframes aboutSlideFadeThree {
+  0%,
+  60%,
+  100% {
+    opacity: 0;
+  }
+
+  70%,
+  92% {
+    opacity: 1;
+  }
 }
 
 .page-copy {
@@ -662,9 +795,428 @@ body {
   max-width: 13ch;
 }
 
+.favorite-books {
+  margin: 30px 0;
+  border-top: 1px solid rgba(217, 207, 193, 0.78);
+  border-bottom: 1px solid rgba(217, 207, 193, 0.78);
+  background: rgba(245, 241, 234, 0.52);
+}
+
+.favorite-books summary {
+  cursor: pointer;
+  padding: 14px 0;
+  color: var(--accent);
+  font-size: 13px;
+  font-weight: 800;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.favorite-books summary::marker {
+  color: rgba(47, 111, 115, 0.72);
+}
+
+.favorite-books ul {
+  display: grid;
+  gap: 10px;
+  margin: 0;
+  padding: 0 0 18px 22px;
+}
+
+.favorite-books li {
+  color: var(--muted);
+  font-size: 16px;
+  line-height: 1.55;
+}
+
+.favorite-books cite {
+  color: var(--ink);
+  font-family: Georgia, "Times New Roman", serif;
+  font-style: italic;
+}
+
+.favorite-books-content {
+  display: grid;
+  grid-template-columns: minmax(280px, 1fr) 190px;
+  gap: 22px;
+  align-items: start;
+}
+
+.book-cover-cluster {
+  position: relative;
+  min-height: 178px;
+  margin-top: -2px;
+}
+
+.mini-book {
+  position: absolute;
+  width: 82px;
+  height: 118px;
+  border: 1.8px solid rgba(42, 42, 38, 0.72);
+  border-radius: 4px 7px 7px 4px;
+  object-fit: cover;
+  box-shadow:
+    5px 7px 0 rgba(42, 42, 38, 0.08),
+    inset 8px 0 0 rgba(42, 42, 38, 0.12);
+  transform-origin: center bottom;
+  filter: saturate(0.9) contrast(0.96);
+  transition:
+    filter 180ms ease,
+    transform 200ms ease,
+    box-shadow 200ms ease,
+    opacity 180ms ease;
+}
+
+.book-cover-cluster:hover .mini-book {
+  opacity: 0.58;
+}
+
+.mini-book-karamazov {
+  top: 0;
+  left: 8px;
+  z-index: 2;
+  transform: rotate(-8deg);
+}
+
+.mini-book-dune {
+  top: 2px;
+  right: 8px;
+  z-index: 3;
+  transform: rotate(7deg);
+}
+
+.mini-book-africa {
+  top: 64px;
+  left: 54px;
+  z-index: 1;
+  transform: rotate(-1deg);
+}
+
+.book-cover-cluster .mini-book:hover {
+  z-index: 8;
+  opacity: 1;
+  filter: saturate(1.08) contrast(1.04);
+  box-shadow: 0 16px 28px rgba(31, 41, 51, 0.18);
+}
+
+.mini-book-karamazov:hover {
+  transform: rotate(-5deg) scale(1.16) translateY(-8px);
+}
+
+.mini-book-dune:hover {
+  transform: rotate(4deg) scale(1.16) translateY(-8px);
+}
+
+.mini-book-africa:hover {
+  transform: rotate(1deg) scale(1.16) translateY(-8px);
+}
+
 .secret-page {
   padding-top: 18px;
   border-top: 1px solid rgba(47, 111, 115, 0.22);
+}
+
+.gamer-secret {
+  position: relative;
+  width: min(980px, 100%);
+  min-height: 720px;
+  display: grid;
+  grid-template-rows: auto auto;
+  gap: 0;
+  place-items: center;
+  isolation: isolate;
+  overflow: hidden;
+}
+
+.secret-copy {
+  position: relative;
+  z-index: 3;
+  width: min(640px, 100%);
+  padding: 34px 42px;
+  border: 1px solid rgba(217, 207, 193, 0.74);
+  border-radius: 8px;
+  background: rgba(245, 241, 234, 0.9);
+  box-shadow: 0 18px 38px rgba(31, 41, 51, 0.08);
+}
+
+.secret-copy h1 {
+  max-width: 13ch;
+}
+
+.egg-race-track {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  pointer-events: none;
+}
+
+.track-line {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+}
+
+.track-line path,
+.track-line use {
+  fill: none;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.road-edge {
+  stroke: rgba(28, 30, 32, 0.42);
+  stroke-width: 34;
+  filter: drop-shadow(0 4px 8px rgba(31, 41, 51, 0.12));
+}
+
+.road-surface {
+  stroke: rgba(118, 122, 124, 0.44);
+  stroke-width: 28;
+}
+
+.road-centerline {
+  stroke: rgba(245, 241, 234, 0.72);
+  stroke-width: 3;
+  stroke-dasharray: 18 18;
+  filter: drop-shadow(0 1px 0 rgba(31, 41, 51, 0.12));
+}
+
+.svg-egg-racer {
+  filter: drop-shadow(0 3px 2px rgba(31, 41, 51, 0.22));
+}
+
+.kart-bounce {
+  animation: kartBodyBounce 0.72s ease-in-out infinite;
+}
+
+.svg-egg-racer-two .kart-bounce {
+  animation-duration: 0.86s;
+  animation-delay: -0.18s;
+}
+
+.svg-egg-racer-three .kart-bounce {
+  animation-duration: 0.78s;
+  animation-delay: -0.34s;
+}
+
+.svg-egg-racer-four .kart-bounce {
+  animation-duration: 0.94s;
+  animation-delay: -0.48s;
+}
+
+.retro-kart {
+  stroke: rgba(24, 27, 30, 0.92);
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.kart-shadow {
+  fill: rgba(24, 27, 30, 0.18);
+  stroke: none;
+}
+
+.kart-pipe {
+  fill: rgba(92, 88, 86, 0.94);
+  stroke-width: 2.5;
+}
+
+.kart-pipe-top {
+  fill: rgba(128, 124, 122, 0.95);
+}
+
+.kart-frame {
+  fill: rgba(82, 84, 86, 0.96);
+  stroke-width: 2.5;
+}
+
+.kart-nose {
+  fill: rgba(198, 200, 201, 0.96);
+  stroke-width: 2.5;
+}
+
+.kart-side {
+  fill: rgba(138, 140, 142, 0.96);
+  stroke-width: 2.5;
+}
+
+.kart-seat {
+  fill: rgba(74, 76, 78, 0.96);
+  stroke-width: 2;
+}
+
+.kart-wheel {
+  fill: rgba(32, 34, 36, 0.96);
+  stroke-width: 2;
+}
+
+.kart-wheel-hub {
+  fill: rgba(219, 221, 221, 0.94);
+  stroke-width: 2;
+}
+
+.wheel-mark {
+  fill: none;
+  stroke: rgba(24, 27, 30, 0.86);
+  stroke-width: 2.75;
+  transform-box: fill-box;
+  transform-origin: center;
+  animation: kartWheelSpin 0.28s linear infinite;
+}
+
+.kart-bumper {
+  fill: none;
+  stroke: rgba(24, 27, 30, 0.82);
+  stroke-width: 3;
+}
+
+.kart-highlight {
+  fill: none;
+  stroke: rgba(245, 241, 234, 0.74);
+  stroke-width: 2;
+}
+
+.racer-egg {
+  fill: var(--racer-egg-color, #f2dfd5);
+  stroke: rgba(42, 42, 38, 0.72);
+  stroke-width: 2.6;
+}
+
+.egg-shine {
+  fill: none;
+  stroke: rgba(255, 255, 255, 0.52);
+  stroke-width: 1.7;
+}
+
+.egg-freckle {
+  fill: rgba(42, 42, 38, 0.24);
+  stroke: none;
+}
+
+.egg-freckle-two {
+  opacity: 0.8;
+}
+
+.svg-egg-racer-two .kart-frame {
+  fill: rgba(104, 106, 108, 0.96);
+}
+
+.svg-egg-racer-three .kart-frame {
+  fill: rgba(174, 176, 177, 0.96);
+}
+
+.svg-egg-racer-four .kart-frame {
+  fill: rgba(86, 88, 90, 0.96);
+}
+
+.svg-egg-racer-one .wheel-mark {
+  animation-duration: 0.22s;
+}
+
+.svg-egg-racer-two .wheel-mark {
+  animation-duration: 0.26s;
+}
+
+.svg-egg-racer-three .wheel-mark {
+  animation-duration: 0.3s;
+}
+
+.svg-egg-racer-four .wheel-mark {
+  animation-duration: 0.34s;
+}
+
+@keyframes kartWheelSpin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes kartBodyBounce {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+
+  35% {
+    transform: translateY(-1.4px);
+  }
+
+  58% {
+    transform: translateY(0.7px);
+  }
+}
+
+.secret-margin-image {
+  position: absolute;
+  z-index: 1;
+  width: 310px;
+  height: 420px;
+  object-fit: cover;
+  opacity: 0.78;
+  filter: saturate(0.88) contrast(0.96);
+  pointer-events: none;
+  -webkit-mask-image:
+    linear-gradient(to right, transparent 0%, #000 18%, #000 70%, transparent 100%),
+    linear-gradient(to bottom, transparent 0%, #000 12%, #000 88%, transparent 100%);
+  -webkit-mask-composite: source-in;
+  mask-image:
+    linear-gradient(to right, transparent 0%, #000 18%, #000 70%, transparent 100%),
+    linear-gradient(to bottom, transparent 0%, #000 12%, #000 88%, transparent 100%);
+  mask-composite: intersect;
+}
+
+.secret-margin-image-right {
+  top: 30px;
+  right: -12px;
+}
+
+.secret-margin-image-lower {
+  top: 88px;
+  left: 24px;
+  width: 330px;
+  height: 215px;
+  opacity: 0.46;
+}
+
+.secret-zelda-gif {
+  position: relative;
+  z-index: 2;
+  display: block;
+  width: min(640px, 100%);
+  height: auto;
+  margin-top: -42px;
+  border: 1px solid rgba(217, 207, 193, 0.62);
+  border-radius: 8px;
+  box-shadow: 0 16px 34px rgba(31, 41, 51, 0.08);
+  -webkit-mask-image: linear-gradient(to bottom, transparent 0%, rgba(0, 0, 0, 0.15) 7%, #000 22%, #000 100%);
+  mask-image: linear-gradient(to bottom, transparent 0%, rgba(0, 0, 0, 0.15) 7%, #000 22%, #000 100%);
+}
+
+.gamer-list {
+  display: grid;
+  gap: 14px;
+  margin: 26px 0 0;
+}
+
+.gamer-list div {
+  padding-top: 14px;
+  border-top: 1px solid rgba(217, 207, 193, 0.7);
+}
+
+.gamer-list dt {
+  color: var(--accent);
+  font-size: 13px;
+  font-weight: 800;
+  letter-spacing: 0;
+  text-transform: uppercase;
+}
+
+.gamer-list dd {
+  margin: 5px 0 0;
+  color: var(--ink);
+  font-size: 18px;
+  line-height: 1.5;
 }
 
 .blog-page {

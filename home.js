@@ -50,10 +50,7 @@ if (evidenceSpotlight && spotlightCards.length > 0 && spotlightReturn) {
     };
 
     const advance = () => {
-      currentIndex = (currentIndex + 1) % slides.length;
-      slides.forEach((slide, slideIndex) => {
-        slide.classList.toggle("is-active", slideIndex === currentIndex);
-      });
+      showSlide(currentIndex + 1);
     };
 
     const startTimer = (delay) => {
