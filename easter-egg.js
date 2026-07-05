@@ -98,70 +98,94 @@ function launchFlyingKart(racer, rect) {
 
 function flyKartToSky(flyer, rect) {
   const startTime = performance.now();
-  const duration = 21000;
+  const duration = 7900;
   const startX = rect.left + rect.width / 2;
   const startY = rect.top + rect.height / 2;
   const endX = window.innerWidth + 90;
   const endY = -90;
   const loopRadius = 150;
-  const loopStart = 0.038;
-  const loopEnd = 0.358;
+  const loopCenterX = startX + 230;
+  const loopCenterY = startY - 176;
+  const loopEntryX = loopCenterX;
+  const loopEntryY = loopCenterY + loopRadius;
+  const approachDistance = Math.hypot(loopEntryX - startX, loopEntryY - startY);
+  const loopDistance = Math.PI * 2 * loopRadius;
+  const exitDistance = Math.hypot(endX - loopEntryX, endY - loopEntryY);
+  const totalDistance = approachDistance + loopDistance + exitDistance;
+  const loopStart = approachDistance / totalDistance;
+  const loopEnd = (approachDistance + loopDistance) / totalDistance;
   let previousRotation = 0;
 
-  function easeOutQuart(progress) {
-    return 1 - Math.pow(1 - progress, 4);
+  function lerp(start, end, progress) {
+    return start + (end - start) * progress;
   }
 
-  function easeInOutSine(progress) {
-    return -(Math.cos(Math.PI * progress) - 1) / 2;
-  }
-
-  function getBasePosition(progress) {
-    const travel = easeOutQuart(progress);
-
-    return {
-      x: startX + (endX - startX) * travel,
-      y: startY + (endY - startY) * travel,
-    };
+  function launchAcceleration(progress) {
+    return (0.34 * progress) + (0.66 * progress * progress);
   }
 
   function getFlightPosition(progress) {
-    const base = getBasePosition(progress);
-    let x = base.x;
-    let y = base.y;
-    let loopRotation = 0;
+    const traveled = totalDistance * launchAcceleration(progress);
 
-    if (progress >= loopStart && progress <= loopEnd) {
-      const loopProgress = easeInOutSine((progress - loopStart) / (loopEnd - loopStart));
-      const angle = loopProgress * Math.PI * 2;
-
-      x += Math.sin(angle) * loopRadius;
-      y += (1 - Math.cos(angle)) * loopRadius;
-      loopRotation = loopProgress * 360;
+    if (traveled < approachDistance) {
+      const segmentProgress = traveled / approachDistance;
+      return {
+        x: lerp(startX, loopEntryX, segmentProgress),
+        y: lerp(startY, loopEntryY, segmentProgress),
+      };
     }
 
+    if (traveled <= approachDistance + loopDistance) {
+      const loopProgress = (traveled - approachDistance) / loopDistance;
+      const angle = (Math.PI / 2) - (loopProgress * Math.PI * 2);
+
+      return {
+        x: loopCenterX + Math.cos(angle) * loopRadius,
+        y: loopCenterY + Math.sin(angle) * loopRadius,
+      };
+    }
+
+    const exitProgress = (traveled - approachDistance - loopDistance) / exitDistance;
+
     return {
-      x,
-      y,
-      loopRotation,
+      x: lerp(loopEntryX, endX, exitProgress),
+      y: lerp(loopEntryY, endY, exitProgress),
+    };
+  }
+
+  function getLaunchShake(progress) {
+    if (progress >= 0.08) {
+      return { x: 0, y: 0 };
+    }
+
+    const fade = 1 - (progress / 0.08);
+
+    return {
+      x: Math.sin(progress * 260) * fade * 0.35,
+      y: Math.cos(progress * 280) * fade * 0.18,
     };
   }
 
   function animateFlight(now) {
     const progress = Math.min((now - startTime) / duration, 1);
+    const distanceProgress = launchAcceleration(progress);
     const position = getFlightPosition(progress);
-    const nextPosition = getFlightPosition(Math.min(progress + 0.004, 1));
-    const x = position.x;
-    const y = position.y;
-    const travelAngle = Math.atan2(nextPosition.y - y, nextPosition.x - x) * (180 / Math.PI);
-    const isLooping = progress >= loopStart && progress <= loopEnd;
+    const nextPosition = getFlightPosition(Math.min(progress + 0.0025, 1));
+    const shake = getLaunchShake(progress);
+    const nextShake = getLaunchShake(Math.min(progress + 0.0025, 1));
+    const x = position.x + shake.x;
+    const y = position.y + shake.y;
+    const nextX = nextPosition.x + nextShake.x;
+    const nextY = nextPosition.y + nextShake.y;
+    const travelAngle = Math.atan2(nextY - y, nextX - x) * (180 / Math.PI);
+    const isLooping = distanceProgress >= loopStart && distanceProgress <= loopEnd;
     const targetRotation = Number.isFinite(travelAngle)
       ? isLooping
         ? travelAngle
         : Math.max(Math.min(travelAngle, 24), -52)
       : previousRotation;
     const angleDelta = ((targetRotation - previousRotation + 540) % 360) - 180;
-    const rotation = previousRotation + angleDelta * 0.28;
+    const rotation = isLooping ? targetRotation : previousRotation + angleDelta * 0.38;
     const scale = 1 - progress * 0.24;
     const opacity = progress > 0.82 ? 1 - (progress - 0.82) / 0.18 : 1;
 
