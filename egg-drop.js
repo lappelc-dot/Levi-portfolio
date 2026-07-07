@@ -43,6 +43,22 @@ if (stage) {
   const floorY = -1.55;
   const gravity = -2.6;
   const shakeDelay = 3.02;
+  const eggPopSoundClips = [
+    { file: "Egg%201.m4a", start: 0.05, end: 0.27 },
+    { file: "Egg%202.m4a", start: 0.06, end: 0.45 },
+    { file: "Egg%203.m4a", start: 0.07, end: 0.76 },
+    { file: "Egg%204.m4a", start: 0.07, end: 0.68 },
+    { file: "Egg%205.m4a", start: 0.06, end: 0.37 },
+  ].map((clip) => {
+    const audio = new Audio(`resources/images/Easter-eggs/${clip.file}`);
+    audio.preload = "auto";
+    audio.volume = 0.72;
+    return {
+      ...clip,
+      audio,
+      timerId: undefined,
+    };
+  });
 
   renderer.setClearColor(0x000000, 0);
   renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
@@ -377,6 +393,17 @@ if (stage) {
     if (!egg.userData.canHatch) {
       return;
     }
+
+    const soundClip = eggPopSoundClips[THREE.MathUtils.randInt(0, eggPopSoundClips.length - 1)];
+    const clipDuration = Math.max(0.08, soundClip.end - soundClip.start);
+    window.clearTimeout(soundClip.timerId);
+    soundClip.audio.pause();
+    soundClip.audio.currentTime = soundClip.start;
+    soundClip.audio.play().catch(() => {});
+    soundClip.timerId = window.setTimeout(() => {
+      soundClip.audio.pause();
+      soundClip.audio.currentTime = soundClip.start;
+    }, clipDuration * 1000);
 
     createClickPop(popPosition);
     createBook(egg.position.clone(), egg.userData.size);

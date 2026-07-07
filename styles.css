@@ -179,6 +179,59 @@ body {
   letter-spacing: 0;
 }
 
+.landing-portrait-slideshow {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 4 / 5;
+  overflow: hidden;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: rgba(239, 231, 218, 0.68);
+  box-shadow: 0 18px 38px rgba(31, 41, 51, 0.1);
+}
+
+.landing-portrait-slideshow img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0;
+  animation: landingPortraitFade 24s ease-in-out infinite;
+}
+
+.landing-portrait-slideshow img:nth-child(1) {
+  animation-delay: 0s;
+}
+
+.landing-portrait-slideshow img:nth-child(2) {
+  animation-delay: 6s;
+}
+
+.landing-portrait-slideshow img:nth-child(3) {
+  animation-delay: 12s;
+}
+
+.landing-portrait-slideshow img:nth-child(4) {
+  animation-delay: 18s;
+}
+
+@keyframes landingPortraitFade {
+  0%,
+  100% {
+    opacity: 0;
+  }
+
+  8%,
+  25% {
+    opacity: 1;
+  }
+
+  33% {
+    opacity: 0;
+  }
+}
+
 .intro-copy {
   position: relative;
   z-index: 1;
@@ -1982,10 +2035,15 @@ body {
 }
 
 .resume-sidebar-item span {
+  display: block;
   color: var(--muted);
   font-size: 14px;
   font-weight: 700;
   line-height: 1.35;
+}
+
+.resume-license-detail {
+  display: block;
 }
 
 .resume-skill-list {
