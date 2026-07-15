@@ -1669,6 +1669,44 @@ body {
   padding-top: 12px;
 }
 
+.video-assignment-page h1 {
+  max-width: none;
+}
+
+.assignment-video-frame {
+  margin-top: 24px;
+  padding: 10px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.54);
+  box-shadow: 0 18px 42px rgba(42, 42, 38, 0.08);
+}
+
+.assignment-video-frame video {
+  display: block;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  border-radius: 5px;
+  background: #111;
+}
+
+.video-download-note {
+  margin-top: 14px;
+  text-align: right;
+  font-size: 15px;
+  font-weight: 700;
+}
+
+.video-download-note a {
+  color: var(--accent);
+  text-decoration: none;
+}
+
+.video-download-note a:hover,
+.video-download-note a:focus-visible {
+  text-decoration: underline;
+}
+
 .references-list {
   margin-top: 34px;
   padding-top: 18px;
