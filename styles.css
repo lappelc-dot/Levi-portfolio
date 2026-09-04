@@ -2178,3 +2178,7 @@ p {
 p + p {
   margin-top: 18px;
 }
+
+.site-nav a[href="m3u1a1.html"] {
+  display: none;
+}
